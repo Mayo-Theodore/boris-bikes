@@ -1,4 +1,4 @@
 require "boris-bikes"
-descibe DockinStation do
-
+describe DockingStation do
+    it { expect(subject).to respond_to(:release_bike) }
 end
