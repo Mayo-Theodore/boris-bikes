@@ -22,28 +22,3 @@ Verbs
 ---------
 release
 working
-
-class Bike
-  def docking_station
-  end
-
-  def is_working
-    # return true if working, else false
-  end
-end
-
-class Person
-  def get_bike
-    # docking station
-  end
-
-  def see_if_working
-    #is_working
-  end
-end
-
-class Docking_station
-end
-
-Person.get_bike
-Person.see_if_working
