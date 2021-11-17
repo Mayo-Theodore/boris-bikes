@@ -17,8 +17,11 @@ class DockingStation
   end
 
   def return_bike(bike)
-   raise "Dockingstation is full" unless @bikes.count == 0
-   @bikes << bike
+    if @bikes.count == 0
+      @bikes << bike
+    else 
+      raise "Dockingstation is full"
+    end
   end
 
   def release_bike
