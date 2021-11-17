@@ -1,4 +1,5 @@
 class DockingStation
+  attr_reader :bikes
   def initialize
     @bikes = []
   end
@@ -10,10 +11,6 @@ class DockingStation
   def return_bike(bike)
     @bikes << bike
   end
-
-  def show_bikes
-    @bikes
-  end
 end
 
 class Bike
@@ -21,10 +18,3 @@ class Bike
     true
   end
 end
-
-DockingStation.return_bike(Bike.new)
-
-
-
-
-
