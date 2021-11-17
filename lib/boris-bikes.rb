@@ -5,19 +5,20 @@ class DockingStation
   end
 
   def err
-    raise "error"
+    raise "Sorry no bikes available"
   end
 
   def check_bike
     if @bikes.empty?
       err
-    else
-    release_bike
+    elsif
+      release_bike
     end 
   end
 
   def return_bike(bike)
-    @bikes << bike
+   raise "Dockingstation is full" unless @bikes.count == 0
+   @bikes << bike
   end
 
   def release_bike

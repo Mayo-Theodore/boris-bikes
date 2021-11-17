@@ -8,6 +8,12 @@ describe DockingStation do
         expect(subject.return_bike(bike)).to be_an_instance_of Array
     end 
     it "throws an error" do
-    expect { subject.err }.to raise_error("error")
+    expect { subject.err }.to raise_error("Sorry no bikes available")
+    end
+
+    describe "#return_bike" do
+        it "raises an error if DockingStation is full" do
+          expect {subject.return_bike(bike)}.to raise_error("Dockingstation is full")
+        end
     end
 end
