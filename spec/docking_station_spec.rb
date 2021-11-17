@@ -6,5 +6,8 @@ describe DockingStation do
     it "return a bike to DockingStation" do
         bike = subject.release_bike
         expect(subject.return_bike(bike)).to be_an_instance_of Array
+    end 
+    it "throws an error" do
+    expect { raise "oops" }.to raise_error(RuntimeError, "oops")
     end
 end

@@ -4,6 +4,7 @@ class DockingStation
     @bikes = []
   end
 
+
   def release_bike
     Bike.new 
   end
@@ -13,8 +14,9 @@ class DockingStation
   end
 end
 
-class Bike
+class Bike  
   def working?
     true
   end
 end
+
