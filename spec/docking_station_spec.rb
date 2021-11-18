@@ -21,15 +21,15 @@ describe DockingStation do
 
     describe "#return_bike" do
         it "raises an error if DockingStation is full" do
-            bike = Bike.new
             dock = DockingStation.new
-            dock.return_bike(bike)
-            expect { dock.return_bike(bike) }.to raise_error("Dockingstation is full")
+            dock.class::DEFAULT_CAPACITY.times { dock.return_bike Bike.new}
+            expect { dock.return_bike Bike.new }.to raise_error("Dockingstation is full")
         end
         it "add a bike if there is no bikes" do
             bike = Bike.new
             expect(subject.return_bike(bike)).to be_an_instance_of Array
         end
     end
+
 end
 # it { expect(subject.release_bike).to be_an_instance_of(Bike)}
