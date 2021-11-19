@@ -25,12 +25,23 @@ describe Van do
 
 
         it "The van puts broken bikes in the garage" do
+            van = Van.new
+            bike = Bike.new
+            bike.broken
+            van.van_capacity << bike
+            expect(van.garage_store).to include(bike)
         end
 
         it "The garage fixes the bikes" do
+            van = Van.new
+            expect(van.garage_take).to be_an_instance_of Bike
+            expect(van.garage_take.working?).to be true
         end
 
-        it "The van only collects fixed bikes from the garage" do
+        it "The van collects fixed bikes from the garage" do
+            van = Van.new
+            expect(van.van_receive[0]).to be_an_instance_of Bike
+            expect(van.van_receive[0].working?).to be true
         end
 
         it "The van puts the working bikes into the docking station" do
