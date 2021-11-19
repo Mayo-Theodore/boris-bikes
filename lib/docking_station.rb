@@ -1,6 +1,8 @@
 require_relative './bike.rb'
+require_relative './bikecontainer.rb'
 
 class DockingStation
+  include BikeContainer
   attr_reader :bikes, :capacity
   DEFAULT_CAPACITY = 20
   def initialize(capacity = DEFAULT_CAPACITY)
@@ -18,36 +20,12 @@ class DockingStation
     else
       @last_bike = @bikes[-1]
       if broken == true
-        broken_bike
+        broken_bike(@bikes,@last_bike)
       elsif broken == false
-        first_bike
+        fixed_bike(@bikes,@last_bike)
         @bikes.shift
       end
     end 
-  end
-
-  def first_bike
-    if @bikes[0].working? == false
-      broke_bike = @bikes.shift
-      @bikes << broke_bike
-      if @last_bike = broke_bike
-        raise "All bikes are broken!"
-      end
-      first_bike
-    end
-  end
-
-  def broken_bike
-    if @bikes[0].working? == true
-      broke_bike = @bikes.shift
-      @bikes << broke_bike
-      if @last_bike == broke_bike
-        raise "All bikes are good!"
-      end
-      broken_bike
-    else
-      @bikes.shift
-    end
   end
 
   def return_bike(bike)

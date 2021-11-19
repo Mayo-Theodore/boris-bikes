@@ -1,6 +1,8 @@
 require_relative 'docking_station.rb'
+require_relative './bikecontainer.rb'
 
 class Van
+    include BikeContainer
     attr_reader :dock
     attr_reader :van_capacity
 
@@ -23,7 +25,7 @@ class Van
         raise "There are no bikes"
       else 
         @last_bike = @van_capacity[-1]
-        bike_to_store = broken_bike
+        bike_to_store = broken_bike(@van_capacity,@last_bike)
         @garage << bike_to_store
       end
         #Storing a bike in the garage
@@ -34,36 +36,14 @@ class Van
         #Van takes a bike from the garage
     end
 
-    def fixed_bike
-        if @van_capacity[0].working? == false
-          broke_bike = @van_capacity.shift
-          @van_capacity << broke_bike
-          if @last_bike == broke_bike
-            raise "All bikes are broken!"
-          end
-          fixed_bike
-        end
-      end
     
-      def broken_bike
-        if @van_capacity[0].working? == true
-          broke_bike = @van_capacity.shift
-          @van_capacity << broke_bike
-          if @last_bike == broke_bike
-            raise "All bikes are good!"
-          end
-          broken_bike
-        else
-          @van_capacity.shift
-        end
-      end
       
       def put_bike_in_ds
         if @van_capacity.empty?
             raise "There are no bikes"
           else 
             @last_bike = @van_capacity[-1]
-            bike_to_store = fixed_bike
+            bike_to_store = fixed_bike(@van_capacity,@last_bike)
             @dock.return_bike(bike_to_store)
           end
       end
