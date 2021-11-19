@@ -1,4 +1,4 @@
-require_relative 'boris-bikes.rb'
+require_relative 'docking_station.rb'
 
 class Van
     attr_reader :dock

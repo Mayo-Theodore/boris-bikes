@@ -1,4 +1,4 @@
-require "boris-bikes"
+require "docking_station"
 describe DockingStation do
     it { expect(subject).to respond_to(:release_bike) }
     it { expect(subject).to respond_to(:return_bike).with(1).argument }
@@ -10,7 +10,7 @@ describe DockingStation do
     describe "#release_bike" do
         it "raises an error if there are no bikes" do
             dock = DockingStation.new
-            (dock.capacity/2.floor).times do 
+            (dock.capacity/2.floor - 1).times do 
                 dock.release_bike
             end
             expect { dock.release_bike }.to raise_error("Sorry no bikes available")
@@ -26,7 +26,7 @@ describe DockingStation do
     describe "#return_bike" do
         it "raises an error if DockingStation is full" do
             dock = DockingStation.new
-            (dock.capacity/2.ceil).times { dock.return_bike bike = double("bike", :working? => true, :broken => true)}
+            (dock.capacity/2.ceil + 1).times { dock.return_bike bike = double("bike", :working? => true, :broken => true)}
             expect { dock.return_bike bike = double("bike", :working? => true, :broken => true) }.to raise_error("Dockingstation is full")
         end
         it "add a bike if there is no bikes" do

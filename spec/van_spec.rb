@@ -7,6 +7,9 @@ describe Van do
 
         it "Takes bikes from the docking station" do
             van = Van.new
+            bike = Bike.new
+            bike.broken
+            van.dock.return_bike(bike)
             expect(van.take_b_bikes[0]).to be_instance_of(Bike)
         end
 
@@ -14,9 +17,12 @@ describe Van do
             van = Van.new
             bike = Bike.new
             bike.broken
+            puts bike.working?
             van.dock.return_bike(bike)
+            puts van.dock.bikes
             expect(van.take_b_bikes[0].working?).to eq false
         end
+
 
         it "The van puts broken bikes in the garage" do
         end

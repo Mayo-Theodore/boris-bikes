@@ -16,10 +16,10 @@ class DockingStation
     if empty?
       raise "Sorry no bikes available"
     else
+      @last_bike = @bikes[-1]
       if broken == true
         broken_bike
       elsif broken == false
-        @last_bike = @bikes[-1]
         first_bike
         @bikes.shift
       end
@@ -41,10 +41,12 @@ class DockingStation
     if @bikes[0].working? == true
       broke_bike = @bikes.shift
       @bikes << broke_bike
-      if @last_bike = broke_bike
+      if @last_bike == broke_bike
         raise "All bikes are good!"
       end
-      first_bike
+      broken_bike
+    else
+      @bikes.shift
     end
   end
 
