@@ -19,7 +19,13 @@ class Van
     end
 
     def garage_store
-        @garage << @van_capacity.shift
+      if @van_capacity.empty?
+        raise "There are no bikes"
+      else 
+        @last_bike = @van_capacity[-1]
+        bike_to_store = broken_bike
+        @garage << bike_to_store
+      end
         #Storing a bike in the garage
     end
 
@@ -27,4 +33,38 @@ class Van
         @van_capacity << garage_take
         #Van takes a bike from the garage
     end
+
+    def fixed_bike
+        if @van_capacity[0].working? == false
+          broke_bike = @van_capacity.shift
+          @van_capacity << broke_bike
+          if @last_bike == broke_bike
+            raise "All bikes are broken!"
+          end
+          fixed_bike
+        end
+      end
+    
+      def broken_bike
+        if @van_capacity[0].working? == true
+          broke_bike = @van_capacity.shift
+          @van_capacity << broke_bike
+          if @last_bike == broke_bike
+            raise "All bikes are good!"
+          end
+          broken_bike
+        else
+          @van_capacity.shift
+        end
+      end
+      
+      def put_bike_in_ds
+        if @van_capacity.empty?
+            raise "There are no bikes"
+          else 
+            @last_bike = @van_capacity[-1]
+            bike_to_store = fixed_bike
+            @dock.return_bike(bike_to_store)
+          end
+      end
 end

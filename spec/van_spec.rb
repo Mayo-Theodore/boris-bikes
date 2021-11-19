@@ -45,5 +45,31 @@ describe Van do
         end
 
         it "The van puts the working bikes into the docking station" do
+            van = Van.new
+            van.van_receive
+            van.dock.return_bike(van.van_capacity[0])
+            expect(van.dock.bikes.length).to eq 10
         end
+
+        it 'The van only puts broken bikes in the garage' do
+            van = Van.new
+            bike = Bike.new
+            bike2 = Bike.new
+            bike2.broken
+            van.van_capacity << bike
+            van.van_capacity << bike2
+            expect(van.garage_store).not_to include(bike)
+        end
+
+        it 'The van only puts fixed bikes, in the docking station' do 
+            van = Van.new
+            bike = Bike.new
+            bike2 = Bike.new
+            bike.broken
+            van.van_capacity << bike
+            van.van_capacity << bike2
+            van.put_bike_in_ds
+            expect(van.dock.bikes).not_to include(bike)
+        end
+
     end
